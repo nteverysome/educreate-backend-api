@@ -1,0 +1,18 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[env]
+NODE_ENV = "production"
+PORT = "3001"
+
+# 數據庫配置（需要在 Railway 控制台設置）
+# DATABASE_URL = "postgresql://..."
+# NEXTAUTH_SECRET = "your-secret-key"
+# NEXTAUTH_URL = "https://your-backend-domain.railway.app"
