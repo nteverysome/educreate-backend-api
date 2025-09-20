@@ -4,6 +4,54 @@ const router = express.Router();
 
 const prisma = new PrismaClient();
 
+// 遊戲列表 API - 根路徑端點
+router.get('/', async (req, res) => {
+  try {
+    // 返回可用的遊戲列表
+    const games = [
+      {
+        id: 'shimozurdo',
+        name: 'Shimozurdo Game',
+        description: '互動式詞彙學習遊戲，支持 GEPT 分級',
+        category: 'vocabulary',
+        difficulty: 'medium',
+        features: ['GEPT分級', '記憶科學', '互動學習']
+      },
+      {
+        id: 'airplane',
+        name: 'Airplane Collision Game',
+        description: '基於主動回憶記憶科學原理的飛機碰撞遊戲',
+        category: 'memory',
+        difficulty: 'hard',
+        features: ['60fps性能', '視覺記憶', '觸覺反饋']
+      },
+      {
+        id: 'match',
+        name: 'Match配對遊戲',
+        description: '基於記憶科學原理的配對遊戲',
+        category: 'matching',
+        difficulty: 'easy',
+        features: ['無障礙設計', '多種模式', '智能適配']
+      }
+    ];
+
+    res.json({
+      status: 'success',
+      message: '遊戲列表獲取成功',
+      data: games,
+      total: games.length,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('獲取遊戲列表失敗:', error);
+    res.status(500).json({
+      status: 'error',
+      message: '獲取遊戲列表失敗',
+      error: error.message
+    });
+  }
+});
+
 // 遊戲統計 API - 移植自 pages/api/games/stats.ts
 router.get('/stats', async (req, res) => {
   const { sessionId, userId } = req.query;

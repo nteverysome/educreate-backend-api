@@ -40,10 +40,20 @@ app.use(express.urlencoded({ extended: true }));
 
 // 健康檢查端點
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
+  res.json({
+    status: 'ok',
     timestamp: new Date().toISOString(),
     service: 'EduCreate Backend API'
+  });
+});
+
+// 基本 API 測試端點
+app.get('/api/test', (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'API 測試端點正常運行',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0'
   });
 });
 
